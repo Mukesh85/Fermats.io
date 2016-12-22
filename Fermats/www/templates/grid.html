@@ -1,19 +1,20 @@
-<ion-view view-title="Playlists">
+<ion-view view-title="{{nickname}}">
   <ion-content id="grid-template" grid-animations-basis>
 
    
   <div id="theGrid" class="main" back-to-grid>
     <section class="grid">
-      <a ui-sref="app.article({articleId: article.articleId})" grid-item class="grid__item" ng-repeat="article in articles">
-        <span class="title title--preview">{{article.title}}</span>
+      <div grid-item class="grid__item" >
+        <span class="title title--preview">Fermats.io</span>
         <div class="loader"></div>
-        <span class="category">{{article.category}}</span>
+        <p>A simple yet poweful chatting app developed using firebase. </p>
         <div class="meta meta--preview">
-          <img class="meta__avatar" ng-src="{{article.author}}" alt="author04" /> 
-          <span class="meta__date"><i class="fa fa-calendar-o"></i>{{article.date}}</span>
-          <span class="meta__reading-time"><i class="fa fa-clock-o"></i>{{article.length}}</span>
+          <input type="text" placeholder = "Name of the chat room" ng-model="chatroomname">
+          
+          <button class="button button-block button-positive" id = "Start_chat" >Chat!</button>
+        
         </div>
-      </a>
+      </div>
     </section>
   </div>
 

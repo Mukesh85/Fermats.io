@@ -48,6 +48,7 @@ angular.module('animatedGrid', ['ionic', 'ui.router', 'animatedGrid.controllers'
 
   .state('app.playlists', {
     url: '/playlists',
+    cache:false,
     views: {
       'menuContent': {
         templateUrl: 'templates/grid.html',
@@ -56,11 +57,12 @@ angular.module('animatedGrid', ['ionic', 'ui.router', 'animatedGrid.controllers'
     }
   })
 
-  .state('app.article', {
-    url: '/article/:articleId',
+  .state('app.chatroom', {
+    url: '/chatroom/:chatRoomName',
     views: {
       'menuContent': {
-        templateUrl: 'templates/article.html'
+        templateUrl: 'templates/chatroom.html',
+        controller:'ChatRoomCtrl'
       }
     }
   });

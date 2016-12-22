@@ -64,16 +64,18 @@ angular.module('animatedGrid.directives', [])
     	require: '^^gridAnimationsBasis',
         link: function (scope, elem, attrs) {
         	var gridViewContainer = document.getElementById('grid-template');
+        	var item = document.getElementById('Start_chat');
 
+        	item.addEventListener('click',function(ev){
+        	console.log(scope.chatroomname);
 			angular.forEach(elem, function(item, pos) {
-				item.addEventListener('click', function(ev) {
 					angular.element(item).addClass('grid__item--loading');
 					$timeout(function(){
 						angular.element(item).addClass('grid__item--animate');
 							animateItem(item);
 							scope.$parent.animationFlag = true;
 							$timeout(function(){
-								$state.go('app.article');
+								$state.go('app.chatroom',{chatRoomName:scope.chatroomname});
 							}, 500);
 					}, 1000);
 				})

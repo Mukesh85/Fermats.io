@@ -10,7 +10,7 @@ angular.module('animatedGrid.controllers', [])
   //});
 
   // Form data for the login modal
-  $scope.loginData = {};
+  $scope.loginData = {nickname:'Anonymous'};
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -31,14 +31,17 @@ angular.module('animatedGrid.controllers', [])
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
+    window.localStorage.setItem("nickname",$scope.nickname)
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
     $timeout(function() {
       $scope.closeLogin();
     }, 1000);
   };
+
+  if(window.localStorage.getItem('nickname') === undefined){
+    $scope.login();
+  }
 })
 
 .controller('PlaylistsCtrl', ['$scope', 'ArticlesService',
@@ -52,6 +55,25 @@ angular.module('animatedGrid.controllers', [])
           },
           function(reason){
             alert('Failed: ' + reason);
+          }
+      );
+    };
+
+    $scope.getArticleList();
+}])
+.controller('ChatRoomCtrl', ['$scope', 'ArticlesService','$stateParams',
+  function($scope, ArticlesService, $stateParams) {
+    console.log($stateParams.chatRoomName)
+    $scope.getArticleList = function() {
+
+      var promise = ArticlesService.get();
+      promise.then(
+          function(details){
+            $scope.articles = details;
+          },
+          function(reason){
+            alert('Failed: ' + reason);
+            $state.go(app.playlists)
           }
       );
     };

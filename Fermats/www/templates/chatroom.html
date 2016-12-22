@@ -1,0 +1,50 @@
+<ion-view view-title="chatroom">
+  <ion-content class = "scrollMsg" article-load>
+  
+  <div>
+      <ol class="chat">
+      <li class="other">
+        <div class="msg">
+            <div class="user">Marga<span class="range admin">Admin</span></div>
+          <p>Dude</p>
+          <p>Want to go dinner? <emoji class="pizza"></emoji></p>
+          <time>20:17</time>
+        </div>
+      </li>
+      <li class="self">
+        <div class="msg">
+          <p>Puff...</p>
+          <p>I'm still doing the Góngora comment... <emoji class="books"></emoji></p>
+          <p>Better other day</p>
+          <time>20:18</time>
+        </div>
+      </li>
+    <!-- <article class="content__item">
+      <span class="category category--full">Life &amp; Death</span>
+      <h2 class="title title--full">Hope for Amy Walters</h2>
+      <div class="meta meta--full">
+        <img class="meta__avatar" src="img/authors/4.png" alt="author04" />
+        <span class="meta__author">Sandra Paulson</span>
+        <span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+        <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+        <span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 7 comments</span>
+        <span class="meta__misc"><i class="fa fa-heart"></i> 12 favorites</span>
+      </div>
+     
+    </article> -->
+    </ol>
+    </div>
+    
+  </ion-content>
+  <ion-footer-bar align-title="left" class="bar-calm">
+  <label style = "width:80%" class="item item-input">
+          
+          <input  type="text" ng-model="message">
+         
+        </label>
+  
+  <div class="buttons" ng-click="doSomething()">
+    <button class="button">Send</button>
+  </div>
+</ion-footer-bar>
+</ion-view>
