@@ -1,0 +1,103 @@
+/* Viewport sizes based on column number */
+$viewport_xs: 	$item_width; /* 1 column */
+$viewport_s: 	$item_width * 2; /* 2 columns */
+$viewport_m: 	$item_width * 3; /* 3 columns */
+$viewport_l: 	$item_width * 4; /* 4 columns */
+$viewport_xl: 	$item_width * 5; /* 5 columns */
+$viewport_xxl: 	$item_width * 6; /* 6 columns */
+
+@media screen and (min-width: $viewport_xs) {
+	html, 
+	body, 
+	.container, 
+	.main {
+		height: 100vh;
+	}
+
+	.main {
+		height: 100%;
+	}
+
+	.content__item {
+		font-size: 1em;
+	}
+
+	.grid__item {
+		padding: 45px 45px 30px;
+	}
+}
+
+@media screen and (min-width: $viewport_s) {
+	.grid {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+	}
+
+	/* 2 columns */
+	.grid__item {
+		width: 50%;
+		border: none;
+	}
+
+	.grid__item::before {
+		top: 5px;
+		right: 5px;
+		bottom: 5px;
+		left: 5px;
+		border: 1px solid rgba(74,74,74,0.075);
+		-webkit-transition: opacity 0.3s;
+		transition: opacity 0.3s;
+	}
+
+	.grid__item:hover::before,
+	.grid__item:focus::before {
+		border: 3px solid rgba(129,196,131,0.5);
+	}
+
+	.grid__item--loading.grid__item::before {
+		opacity: 0;
+	}
+}
+
+@media screen and (min-width: $viewport_m) {
+	/* 3 columns */
+	.grid__item {
+		width: 33.333%;
+	}
+}
+
+@media screen and (min-width: $viewport_l) {
+	/* 4 columns */
+	.grid__item {
+		width: 25%;
+	}
+}
+
+@media screen and (min-width: $viewport_xl) {
+	/* 5 columns */
+	.grid__item {
+		width: 20%;
+	}
+}
+
+@media screen and (min-width: $viewport_xxl) {
+	/* 6 columns */
+	.grid__item {
+		width: 16.66%;
+	}
+}
+
+/* small screen changes for sidebar (it becomes an off-canvas menu) */
+@media screen and (max-width: $viewport_xs - 1px) {
+	.title--full {
+		font-size: 2em;
+	}
+	.content__item {
+		padding: 80px 20px 40px;
+	}
+}
