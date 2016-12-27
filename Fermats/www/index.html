@@ -25,6 +25,18 @@
     <script src="js/controllers.js"></script>
     <script src="js/directives.js"></script>
     <script src="js/modernizr.custom.js"></script>
+    <script src="lib/Firebase/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCdzAc8nQoGF8iMeQ0htmsxONwYDg52jo0",
+    authDomain: "fermats-4597a.firebaseapp.com",
+    databaseURL: "https://fermats-4597a.firebaseio.com",
+    storageBucket: "fermats-4597a.appspot.com",
+    messagingSenderId: "1092190497627"
+  };
+  firebase.initializeApp(config);
+</script>
   </head>
 
   <body ng-app="animatedGrid">

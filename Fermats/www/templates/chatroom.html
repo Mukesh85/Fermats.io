@@ -1,22 +1,13 @@
 <ion-view view-title="chatroom">
-  <ion-content class = "scrollMsg" article-load>
+  <ion-content id = "scrollmsgs" class = "scrollMsg" article-load schrollBottom>
   
   <div>
       <ol class="chat">
-      <li class="other">
+      <li ng-class="{'other':msg.username != name,'self':msg.username==name}" ng-repeat = "msg in message_list">
         <div class="msg">
-            <div class="user">Marga<span class="range admin">Admin</span></div>
-          <p>Dude</p>
-          <p>Want to go dinner? <emoji class="pizza"></emoji></p>
-          <time>20:17</time>
-        </div>
-      </li>
-      <li class="self">
-        <div class="msg">
-          <p>Puff...</p>
-          <p>I'm still doing the Góngora comment... <emoji class="books"></emoji></p>
-          <p>Better other day</p>
-          <time>20:18</time>
+            <div class="user">{{msg.username}}<!-- <span class="range admin">Admin</span></div> -->
+          <p>{{msg.message}}</p>
+          <time>{{msg.timestamp | date}}</time>
         </div>
       </li>
     <!-- <article class="content__item">
@@ -44,7 +35,7 @@
         </label>
   
   <div class="buttons" ng-click="doSomething()">
-    <button class="button">Send</button>
+    <button class="button" ng-click = "sendMessage()">Send</button>
   </div>
 </ion-footer-bar>
 </ion-view>

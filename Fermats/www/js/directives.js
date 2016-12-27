@@ -67,7 +67,7 @@ angular.module('animatedGrid.directives', [])
         	var item = document.getElementById('Start_chat');
 
         	item.addEventListener('click',function(ev){
-        	console.log(scope.chatroomname);
+        	if(scope.chatroomname != null && scope.chatroomname != undefined && scope.chatroomname != ''){
 			angular.forEach(elem, function(item, pos) {
 					angular.element(item).addClass('grid__item--loading');
 					$timeout(function(){
@@ -79,6 +79,7 @@ angular.module('animatedGrid.directives', [])
 							}, 500);
 					}, 1000);
 				})
+		}
 			})
 
 			function animateItem(item) {
@@ -152,3 +153,19 @@ angular.module('animatedGrid.directives', [])
 		}
 	}
 })
+.directive('schrollBottom', function () {
+  return {
+    scope: {
+      schrollBottom: "="
+    },
+    link: function (scope, element) {
+      scope.$watchCollection('schrollBottom', function (newValue) {
+        if (newValue)
+        {
+          $(element).scrollTop($(element)[0].scrollHeight);
+        }
+      });
+    }
+  }
+})
+

@@ -31,7 +31,7 @@ angular.module('animatedGrid.controllers', [])
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    window.localStorage.setItem("nickname",$scope.nickname)
+    window.localStorage.setItem("nickname",$scope.loginData.nickname)
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
     $timeout(function() {
@@ -39,8 +39,12 @@ angular.module('animatedGrid.controllers', [])
     }, 1000);
   };
 
-  if(window.localStorage.getItem('nickname') === undefined){
-    $scope.login();
+  if(window.localStorage.getItem('nickname') == undefined){
+    $scope.loginData.nickname = 'Anonymous';
+  }
+  else{
+    $scope.loginData.nickname = window.localStorage.getItem('nickname');
+    console.log(window.localStorage.getItem('nickname'))
   }
 })
 
@@ -61,22 +65,60 @@ angular.module('animatedGrid.controllers', [])
 
     $scope.getArticleList();
 }])
-.controller('ChatRoomCtrl', ['$scope', 'ArticlesService','$stateParams',
-  function($scope, ArticlesService, $stateParams) {
+.controller('ChatRoomCtrl', ['$scope', 'ArticlesService','$stateParams','$state',
+  function($scope, ArticlesService, $stateParams,$state) {
+
+    var scroll = document.getElementById('scrollmsgs');
+
     console.log($stateParams.chatRoomName)
+    $scope.message_list_object = {};
+    $scope.message_list = [];
+    var database = firebase.database();
+    $scope.name = window.localStorage.getItem('nickname');
+    console.log(name);
+    $scope.sendMessage = function(){
+
+            if($scope.message != "" && $scope.message != null && $scope.message != undefined){
+              database.ref('/chatrooms/' + $stateParams.chatRoomName+'/chats/').push({
+          'username': $scope.name,
+          'message': $scope.message,
+          'timestamp' : new Date().getTime()
+        });
+
+
+        $scope.message = "";
+      }
+      
+    }
+
+
+
+    function update_messages(){
+
+      $scope.message_list.push($scope.message_list_object)
+    }
+
+    
+
     $scope.getArticleList = function() {
 
-      var promise = ArticlesService.get();
-      promise.then(
-          function(details){
-            $scope.articles = details;
-          },
-          function(reason){
-            alert('Failed: ' + reason);
-            $state.go(app.playlists)
-          }
-      );
-    };
+      database.ref('/chatrooms/' + $stateParams.chatRoomName+'/chats/').on('value',function(snapshot) {
+        temp = snapshot.val();
+        $scope.message_list = [];
+        for(i in temp){
+          $scope.message_list.push(temp[i]);
+        }
+        console.log($scope.message_list);
+        $scope.$apply();
+
+        scroll.scrollTop = scroll.scrollHeight;
+
+      });
+
+     
+    }
+
+    
 
     $scope.getArticleList();
 }]);
